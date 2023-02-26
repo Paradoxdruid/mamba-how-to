@@ -8,7 +8,7 @@ Typically and traditionally, Python installation relies on the `pip` tool, and a
 
 An alternative, that I espouse as a much better general solution for most folks, is ***completely abandoning*** that ecosystem and embracing the **Conda/Mamba** environment and package management ecosystem as an alternative.  This alternative works on OSX, Windows, and Linux, has an active community, and allows seamless management of non-Python dependencies as well.  It's a win!
 
-($\color{blue}\textsf{\normalsize Note}$: **Mamba** is a community-driven fork of **Conda** that is faster, more open, with more up to date packages and a much faster solver for dependency resolution.  Here, we will use mamba extensively--  but it is compatible with conda; resources you find for conda will work seamlessly and correctly in this setup as well.  In fact, the [conda cheatsheet](https://conda.io/projects/conda/en/latest/_downloads/843d9e0198f2a193a3484886fa28163c/conda-cheatsheet.pdf) is a quite useful one-pager reference!)
+($\color{blue}\textsf{\normalsize Note}$: **mamba** is a drop-in replacement for the default **conda** software command line interface/utility that has a much faster solver for dependency resolution.  Here, we will use `mamba` extensively--  but it is compatible with (and often simply a wrapper around) the `conda` CLI; resources you find for conda will work seamlessly and correctly in this setup as well-- and you can almost always replace `mamba` with `conda` in commands-- `mamba` will just solve installations much faster. The [conda cheatsheet](https://conda.io/projects/conda/en/latest/_downloads/843d9e0198f2a193a3484886fa28163c/conda-cheatsheet.pdf) is a quite useful one-pager reference!)
 
 -----
 
@@ -29,11 +29,11 @@ In the **conda/mamba** ecosystem, Python and other software is always organized 
 
 ## Installation
 
-My recommended way to get started is by installing the [**mamba-forge** installer](https://github.com/conda-forge/miniforge#mambaforge).
+My recommended way to get started is by installing the [**mamba-forge installer (click here)**](https://github.com/conda-forge/miniforge#mambaforge).  Importantly, this will set your system to download and install software packages from the community-driven [conda-forge](https://conda-forge.org/index.html) repository, which has a wide-selection of up-to-date packages.
 
-This will install the core **mamba** CLI tools, and create your first virtual environment, named `base`.
+This will install the core **mamba** CLI tool (and **conda** infrastructure), and create your first virtual environment, named `base`.
 
-(*Note*: It's a good habit to avoid the temptation of installing much else in this base environment, so don't go hog-wild installing dependencies just yet!)
+($\color{blue}\textsf{\normalsize Note}$: It's an **extremely** good habit to avoid the temptation of installing much else in this base environment, so don't go hog-wild installing dependencies just yet!)
 
 After installation, **mamba** will automatically add to your shell configuration to activate the `base` environment on startup (modifying your `.bashrc`, `.zshrc`, or `profile.ps1` depending on your shell of choice; it's also compatible with Oh-My-Zsh, Spaceship, Starship, and many other prompt modifiers).  That means that after installation, if you restart your shell, you should see something like:
 
@@ -41,7 +41,7 @@ After installation, **mamba** will automatically add to your shell configuration
 user@host\~ (base)$
 ```
 
-Notice that the `base` mamba environment is active.
+Notice that the `base` conda environment is active.
 
 ## Getting started
 
@@ -51,7 +51,7 @@ Best practice is to avoid modifying the `base` environment, so let's create a ty
 mamba create --name default python=3.11
 ```
 
-This will create a new **mamba** environment named `default` with Python version 3.11 (the latest and greatest stable version, as of this writing).
+This will create a new environment named `default` with Python version 3.11 (the latest and greatest stable version, as of this writing).
 
 We can then modify our configuration file (`.bashrc`, `.zshrc`, etc.) by adding the following line at the very end:  `mamba activate default`.  That will cause it to be activated when we open a new shell, leaving the `base` environment untouched.
 
@@ -71,7 +71,7 @@ That command searches the `conda-forge` repository of packages (the default, and
 
 You can check your currently installed packages in your active environment with: `mamba list`
 
-You can still use `pip` inside a mamba environment... but probably shouldn't.  Use it as a last resort to install packages otherwise unavailable.  It has [possible conflicts](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#using-pip-in-an-environment).
+You can still use `pip` inside a mamba environment... but probably should use it as a last resort for packages unavailable on conda-forge.  Using pip introduces the possibility of [conflicts](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#using-pip-in-an-environment), but is generally safe.
 
 ## Managing environments
 
@@ -121,7 +121,7 @@ To ensure an `environment.yml` file works cross-platform, we can ensure we only 
 
 ### Environment Version History
 
-One welcome feature of **Mamba** is that, like **Git**, it stores version history for an environment, and it is possible to roll-back to prior versions.
+One welcome feature of **conda** is that, like **git**, it stores version history for an environment, and it is possible to roll-back to prior versions.
 
 `mamba list --revisions` and `mamba install --revision=REVNUM` can be used to restore prior states of the environment.
 
@@ -137,7 +137,7 @@ Once you have a conda package, you can host it on your own channel / repository,
 
 ## IDE Integration
 
-**Mamba/Conda** virtual environments should be automatically detected and used by most major IDEs, such as [VS Code](https://code.visualstudio.com/docs/python/environments) and [PyCharm](https://www.jetbrains.com/help/pycharm/conda-support-creating-conda-virtual-environment.html).
+**Conda** virtual environments should be automatically detected and used by most major IDEs, such as [VS Code](https://code.visualstudio.com/docs/python/environments) and [PyCharm](https://www.jetbrains.com/help/pycharm/conda-support-creating-conda-virtual-environment.html).
 
 ## Further Contributions?
 
